@@ -137,7 +137,7 @@ export default function PushNotificationManager() {
         try {
           subscription = await activeRegistration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey,
+            applicationServerKey: applicationServerKey as BufferSource,
           });
           
           console.log("Push-Subscription erfolgreich erstellt:", {
