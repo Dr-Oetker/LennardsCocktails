@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Drink {
+  id          String       @id @default(cuid())
+  name        String
+  ingredients String[]     // Zutaten-Liste (ohne Mengenangabe)
+  recipe      String?      // Rezept (nur Admin sichtbar)
+  parties     PartyDrink[]
+  orderItems  OrderItem[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Party {
+  id        String       @id @default(cuid())
+  name      String
+  slug      String       @unique
+  isActive  Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  drinks    PartyDrink[]
+  orders    Order[]
+}
+
+// Verknüpfungstabelle: welche Getränke sind bei welcher Party verfügbar
+model PartyDrink {
+  party   Party  @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  partyId String
+  drink   Drink  @relation(fields: [drinkId], references: [id], onDelete: Cascade)
+  drinkId String
+
+  @@id([partyId, drinkId])
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  guestName   String
+  createdAt   DateTime    @default(now())
+  isCompleted Boolean     @default(false)
+  completedAt DateTime?
+  party       Party       @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  partyId     String
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id      String @id @default(cuid())
+  drink   Drink  @relation(fields: [drinkId], references: [id], onDelete: Cascade)
+  drinkId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId String
+}
+
+model PushSubscription {
+  id          String   @id @default(cuid())
+  endpoint    String   @unique
+  p256dh      String
+  auth        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
