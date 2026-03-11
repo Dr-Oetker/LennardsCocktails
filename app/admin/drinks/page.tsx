@@ -70,13 +70,11 @@ export default function DrinksPage() {
         await fetchDrinks();
         resetForm();
       } else {
-        // Versuche Fehlermeldung aus Response zu extrahieren
         let errorMessage = "Fehler beim Speichern des Getränks.";
         try {
           const errorData = await response.json();
           errorMessage = errorData.error || errorMessage;
         } catch (e) {
-          // Wenn Response kein JSON ist, zeige Status
           errorMessage = `Fehler ${response.status}: ${response.statusText}`;
         }
         alert(errorMessage);
@@ -126,52 +124,52 @@ export default function DrinksPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
+      <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-gray-600">Lade Getränke...</p>
+          <p className="text-[#6b6b6b]">Lade Getränke...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              🍹 Getränke-Verwaltung
+            <h1 className="text-2xl sm:text-3xl font-semibold text-[#1a1a1a] tracking-tight">
+              Getränke-Verwaltung
             </h1>
-            <p className="text-gray-600 mt-1">
+            <p className="text-sm sm:text-base text-[#6b6b6b] mt-1">
               Verwalte die globale Getränke-Datenbank
             </p>
           </div>
           <Link
             href="/admin/dashboard"
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+            className="px-4 py-2 bg-white border border-[#e5e3e0] text-[#1a1a1a] rounded-lg hover:bg-[#faf9f7] transition-colors text-sm sm:text-base font-medium text-center sm:text-left"
           >
-            ← Zurück zum Dashboard
+            Zurück zum Dashboard
           </Link>
         </div>
 
         <button
           onClick={() => setShowForm(!showForm)}
-          className="mb-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+          className="mb-6 px-5 py-2.5 sm:px-6 sm:py-3 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-medium text-sm sm:text-base w-full sm:w-auto"
         >
-          {showForm ? "✕ Abbrechen" : "+ Neues Getränk hinzufügen"}
+          {showForm ? "Abbrechen" : "Neues Getränk hinzufügen"}
         </button>
 
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="mb-8 bg-white p-6 rounded-lg shadow-md"
+            className="mb-8 bg-white border border-[#e5e3e0] p-5 sm:p-6 rounded-lg"
           >
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] mb-5">
               {editingDrink ? "Getränk bearbeiten" : "Neues Getränk"}
             </h2>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Name *
               </label>
               <input
@@ -180,14 +178,14 @@ export default function DrinksPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-[#e5e3e0] rounded-lg focus:ring-2 focus:ring-[#c9732f] focus:border-[#c9732f] bg-white text-[#1a1a1a] placeholder:text-[#6b6b6b] transition-colors"
                 placeholder="z.B. Mojito"
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Zutaten * (durch Komma getrennt)
               </label>
               <input
@@ -196,17 +194,17 @@ export default function DrinksPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, ingredients: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-[#e5e3e0] rounded-lg focus:ring-2 focus:ring-[#c9732f] focus:border-[#c9732f] bg-white text-[#1a1a1a] placeholder:text-[#6b6b6b] transition-colors"
                 placeholder="z.B. Rum, Limette, Minze, Soda"
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-[#6b6b6b] mt-1">
                 Trenne mehrere Zutaten mit Kommas
               </p>
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Rezept (optional, nur für Admin sichtbar)
               </label>
               <textarea
@@ -215,22 +213,22 @@ export default function DrinksPage() {
                   setFormData({ ...formData, recipe: e.target.value })
                 }
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-[#e5e3e0] rounded-lg focus:ring-2 focus:ring-[#c9732f] focus:border-[#c9732f] bg-white text-[#1a1a1a] placeholder:text-[#6b6b6b] transition-colors resize-y"
                 placeholder="z.B. 50ml Rum, 25ml Limettensaft, 10 Blätter Minze..."
               />
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                className="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-medium text-sm sm:text-base"
               >
                 {editingDrink ? "Aktualisieren" : "Hinzufügen"}
               </button>
               <button
                 type="button"
                 onClick={resetForm}
-                className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+                className="px-5 py-2.5 sm:px-6 sm:py-3 bg-white border border-[#e5e3e0] text-[#1a1a1a] rounded-lg hover:bg-[#faf9f7] transition-colors text-sm sm:text-base font-medium"
               >
                 Abbrechen
               </button>
@@ -238,32 +236,32 @@ export default function DrinksPage() {
           </form>
         )}
 
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-white border border-[#e5e3e0] rounded-lg overflow-hidden">
           {drinks.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
-              <p className="text-lg">Noch keine Getränke vorhanden.</p>
-              <p className="text-sm mt-2">
+            <div className="p-8 text-center text-[#6b6b6b]">
+              <p className="text-base sm:text-lg mb-2 font-medium">Noch keine Getränke vorhanden.</p>
+              <p className="text-sm">
                 Klicke auf "Neues Getränk hinzufügen" um zu beginnen.
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-[#e5e3e0]">
               {drinks.map((drink) => (
-                <div key={drink.id} className="p-6 hover:bg-gray-50 transition">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <div key={drink.id} className="p-5 sm:p-6 hover:bg-[#faf9f7] transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] mb-3">
                         {drink.name}
                       </h3>
-                      <div className="mb-2">
-                        <p className="text-sm font-medium text-gray-700 mb-1">
+                      <div className="mb-3">
+                        <p className="text-sm font-medium text-[#1a1a1a] mb-2">
                           Zutaten:
                         </p>
                         <div className="flex flex-wrap gap-2">
                           {drink.ingredients.map((ingredient, idx) => (
                             <span
                               key={idx}
-                              className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                              className="px-2.5 sm:px-3 py-1 bg-[#f5e6d9] text-[#c9732f] rounded-full text-xs sm:text-sm font-medium"
                             >
                               {ingredient}
                             </span>
@@ -272,25 +270,25 @@ export default function DrinksPage() {
                       </div>
                       {drink.recipe && (
                         <div className="mt-3">
-                          <p className="text-sm font-medium text-gray-700 mb-1">
+                          <p className="text-sm font-medium text-[#1a1a1a] mb-1">
                             Rezept:
                           </p>
-                          <p className="text-sm text-gray-600 whitespace-pre-wrap">
+                          <p className="text-sm text-[#6b6b6b] whitespace-pre-wrap">
                             {drink.recipe}
                           </p>
                         </div>
                       )}
                     </div>
-                    <div className="ml-4 flex gap-2">
+                    <div className="flex flex-row sm:flex-col gap-2 sm:ml-4">
                       <button
                         onClick={() => handleEdit(drink)}
-                        className="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg hover:bg-yellow-200 transition text-sm font-medium"
+                        className="px-4 py-2 bg-[#faf5e6] text-[#8b6914] rounded-lg hover:bg-[#f5f0dc] transition-colors text-sm font-medium whitespace-nowrap"
                       >
                         Bearbeiten
                       </button>
                       <button
                         onClick={() => handleDelete(drink.id)}
-                        className="px-4 py-2 bg-red-100 text-red-800 rounded-lg hover:bg-red-200 transition text-sm font-medium"
+                        className="px-4 py-2 bg-[#faeaea] text-[#8b2e2e] rounded-lg hover:bg-[#f5dada] transition-colors text-sm font-medium whitespace-nowrap"
                       >
                         Löschen
                       </button>

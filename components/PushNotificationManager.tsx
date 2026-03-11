@@ -246,32 +246,32 @@ export default function PushNotificationManager() {
   }
 
   return (
-    <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-      <h3 className="font-semibold text-gray-900 mb-2">🔔 Push-Benachrichtigungen</h3>
+    <div className="mb-4 sm:mb-6 p-4 sm:p-5 bg-white border border-[#e5e3e0] rounded-lg">
+      <h3 className="font-semibold text-[#1a1a1a] mb-3 text-sm sm:text-base">Push-Benachrichtigungen</h3>
       {!publicKey ? (
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-[#6b6b6b]">
           VAPID Keys nicht konfiguriert. Bitte setze VAPID_PUBLIC_KEY und VAPID_PRIVATE_KEY in der .env Datei.
         </p>
       ) : isSubscribed ? (
         <div>
-          <p className="text-sm text-gray-600 mb-2">
+          <p className="text-sm text-[#6b6b6b] mb-3">
             Push-Benachrichtigungen sind aktiviert. Du wirst über neue Bestellungen benachrichtigt.
           </p>
           <button
             onClick={unsubscribeFromPush}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition text-sm"
+            className="px-4 py-2 bg-white border border-[#e5e3e0] text-[#1a1a1a] rounded-lg hover:bg-[#faf9f7] transition-colors text-sm font-medium"
           >
             Deaktivieren
           </button>
         </div>
       ) : (
         <div>
-          <p className="text-sm text-gray-600 mb-2">
+          <p className="text-sm text-[#6b6b6b] mb-3">
             Aktiviere Push-Benachrichtigungen, um sofort über neue Bestellungen informiert zu werden.
           </p>
           <button
             onClick={subscribeToPush}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
+            className="px-4 py-2 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors text-sm font-medium"
           >
             Aktivieren
           </button>

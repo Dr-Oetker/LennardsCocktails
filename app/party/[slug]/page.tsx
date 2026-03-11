@@ -88,7 +88,6 @@ export default function PartyOrderPage() {
 
       if (response.ok) {
         setOrderSuccess(true);
-        // Nach 3 Sekunden zur Bestätigungsseite weiterleiten
         setTimeout(() => {
           router.push(`/party/${params.slug}/success`);
         }, 3000);
@@ -106,10 +105,10 @@ export default function PartyOrderPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#faf9f7] flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Lade Getränkekarte...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c9732f] mx-auto mb-4"></div>
+          <p className="text-[#6b6b6b]">Lade Getränkekarte...</p>
         </div>
       </div>
     );
@@ -117,15 +116,15 @@ export default function PartyOrderPage() {
 
   if (error || !party) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            🍹 Lennards Cocktails
+      <div className="min-h-screen bg-[#faf9f7] flex items-center justify-center p-4">
+        <div className="bg-white border border-[#e5e3e0] rounded-lg p-6 sm:p-8 max-w-md w-full text-center">
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#1a1a1a] mb-4">
+            Lennards Cocktails
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-[#6b6b6b] mb-6">
             {error || "Party nicht gefunden"}
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[#6b6b6b]">
             Bitte überprüfe den Link oder kontaktiere den Gastgeber.
           </p>
         </div>
@@ -135,16 +134,20 @@ export default function PartyOrderPage() {
 
   if (orderSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-          <div className="text-6xl mb-4">✅</div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+      <div className="min-h-screen bg-[#faf9f7] flex items-center justify-center p-4">
+        <div className="bg-white border border-[#e5e3e0] rounded-lg p-6 sm:p-8 max-w-md w-full text-center">
+          <div className="w-16 h-16 bg-[#e8f3ed] rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-[#2d5a3d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#1a1a1a] mb-4">
             Bestellung aufgegeben!
           </h1>
-          <p className="text-gray-600">
+          <p className="text-[#6b6b6b]">
             Deine Bestellung wurde erfolgreich übermittelt.
           </p>
-          <p className="text-sm text-gray-500 mt-4">
+          <p className="text-sm text-[#6b6b6b] mt-4">
             Du wirst gleich weitergeleitet...
           </p>
         </div>
@@ -155,26 +158,26 @@ export default function PartyOrderPage() {
   const availableDrinks = party.drinks.map((pd) => pd.drink);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+    <div className="min-h-screen bg-[#faf9f7] py-6 sm:py-8 px-4">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            🍹 Lennards Cocktails
+        <div className="bg-white border border-[#e5e3e0] rounded-lg p-5 sm:p-6 md:p-8 mb-6 text-center">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#1a1a1a] mb-2 tracking-tight">
+            Lennards Cocktails
           </h1>
-          <p className="text-gray-600 text-center mb-1">{party.name}</p>
-          <p className="text-sm text-gray-500 text-center">
+          <p className="text-base sm:text-lg text-[#4a4a4a] mb-1 font-medium">{party.name}</p>
+          <p className="text-sm text-[#6b6b6b]">
             Wähle deine Getränke aus
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Getränkeauswahl */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="bg-white border border-[#e5e3e0] rounded-lg p-5 sm:p-6 md:p-8">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] mb-4 sm:mb-5">
               Getränkekarte
             </h2>
             {availableDrinks.length === 0 ? (
-              <p className="text-gray-500 text-center py-8">
+              <p className="text-[#6b6b6b] text-center py-8">
                 Keine Getränke verfügbar.
               </p>
             ) : (
@@ -184,23 +187,23 @@ export default function PartyOrderPage() {
                   return (
                     <label
                       key={drink.id}
-                      className={`flex items-start p-4 rounded-lg border-2 cursor-pointer transition ${
+                      className={`flex items-start p-4 rounded-lg border-2 cursor-pointer transition-colors ${
                         isSelected
-                          ? "border-blue-500 bg-blue-50"
-                          : "border-gray-200 hover:border-gray-300"
+                          ? "border-[#c9732f] bg-[#f5e6d9]"
+                          : "border-[#e5e3e0] hover:border-[#c9732f]/50 bg-white"
                       }`}
                     >
                       <input
                         type="checkbox"
                         checked={isSelected}
                         onChange={() => toggleDrink(drink.id)}
-                        className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="mt-1 w-5 h-5 text-[#c9732f] border-[#e5e3e0] rounded focus:ring-[#c9732f]"
                       />
-                      <div className="ml-3 flex-1">
-                        <p className="font-semibold text-gray-900">
+                      <div className="ml-3 flex-1 min-w-0">
+                        <p className="font-semibold text-[#1a1a1a] text-sm sm:text-base">
                           {drink.name}
                         </p>
-                        <p className="text-sm text-gray-600 mt-1">
+                        <p className="text-xs sm:text-sm text-[#6b6b6b] mt-1">
                           {drink.ingredients.join(", ")}
                         </p>
                       </div>
@@ -212,10 +215,10 @@ export default function PartyOrderPage() {
           </div>
 
           {/* Name eingeben */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <div className="bg-white border border-[#e5e3e0] rounded-lg p-5 sm:p-6 md:p-8">
             <label
               htmlFor="guestName"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-[#1a1a1a] mb-2"
             >
               Dein Name *
             </label>
@@ -224,7 +227,7 @@ export default function PartyOrderPage() {
               type="text"
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-[#e5e3e0] rounded-lg focus:ring-2 focus:ring-[#c9732f] focus:border-[#c9732f] bg-white text-[#1a1a1a] placeholder:text-[#6b6b6b] transition-colors"
               placeholder="Gib hier deinen Namen ein"
               required
             />
@@ -234,13 +237,13 @@ export default function PartyOrderPage() {
           <button
             type="submit"
             disabled={submitting || selectedDrinks.length === 0 || !guestName.trim()}
-            className="w-full px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="w-full px-6 py-4 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-semibold text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? "Wird gesendet..." : "Bestellung absenden"}
           </button>
 
           {selectedDrinks.length > 0 && (
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-sm text-[#6b6b6b]">
               {selectedDrinks.length} Getränk{selectedDrinks.length !== 1 ? "e" : ""} ausgewählt
             </p>
           )}

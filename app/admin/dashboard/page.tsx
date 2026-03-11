@@ -134,9 +134,9 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-gray-600">Lade Dashboard...</p>
+      <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-[#6b6b6b]">Lade Dashboard...</p>
         </div>
       </div>
     );
@@ -146,27 +146,27 @@ export default function DashboardPage() {
   const inactiveParties = parties.filter((p) => !p.isActive);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6 flex items-center justify-between">
+    <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              🎉 Party-Verwaltung
+            <h1 className="text-2xl sm:text-3xl font-semibold text-[#1a1a1a] tracking-tight">
+              Party-Verwaltung
             </h1>
-            <p className="text-gray-600 mt-1">
+            <p className="text-sm sm:text-base text-[#6b6b6b] mt-1">
               Verwalte deine Partys und Bestellungen
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <Link
               href="/admin/drinks"
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+              className="px-4 py-2 bg-white border border-[#e5e3e0] text-[#1a1a1a] rounded-lg hover:bg-[#faf9f7] transition-colors text-sm sm:text-base font-medium text-center"
             >
               Getränke verwalten
             </Link>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition"
+              className="px-4 py-2 bg-white border border-[#e5e3e0] text-[#8b2e2e] rounded-lg hover:bg-[#faeaea] transition-colors text-sm sm:text-base font-medium"
             >
               Abmelden
             </button>
@@ -177,20 +177,20 @@ export default function DashboardPage() {
 
         <button
           onClick={() => setShowForm(!showForm)}
-          className="mb-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+          className="mb-6 px-5 py-2.5 sm:px-6 sm:py-3 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-medium text-sm sm:text-base w-full sm:w-auto"
         >
-          {showForm ? "✕ Abbrechen" : "+ Neue Party anlegen"}
+          {showForm ? "Abbrechen" : "Neue Party anlegen"}
         </button>
 
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="mb-8 bg-white p-6 rounded-lg shadow-md"
+            className="mb-8 bg-white border border-[#e5e3e0] p-5 sm:p-6 rounded-lg"
           >
-            <h2 className="text-xl font-semibold mb-4">Neue Party</h2>
+            <h2 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] mb-5">Neue Party</h2>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Partyname *
               </label>
               <input
@@ -199,42 +199,42 @@ export default function DashboardPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-[#e5e3e0] rounded-lg focus:ring-2 focus:ring-[#c9732f] focus:border-[#c9732f] bg-white text-[#1a1a1a] placeholder:text-[#6b6b6b] transition-colors"
                 placeholder="z.B. Sommerparty 2025"
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="mb-5">
+              <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
                 Verfügbare Getränke auswählen *
               </label>
               {availableDrinks.length === 0 ? (
-                <p className="text-sm text-gray-500 mb-2">
+                <p className="text-sm text-[#6b6b6b] mb-2">
                   Keine Getränke vorhanden.{" "}
                   <Link
                     href="/admin/drinks"
-                    className="text-blue-600 hover:underline"
+                    className="text-[#c9732f] hover:text-[#b86528] underline font-medium"
                   >
                     Erstelle zuerst Getränke
                   </Link>
                   .
                 </p>
               ) : (
-                <div className="border border-gray-300 rounded-lg p-4 max-h-64 overflow-y-auto">
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="border border-[#e5e3e0] rounded-lg p-4 max-h-64 overflow-y-auto bg-[#faf9f7]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                     {availableDrinks.map((drink) => (
                       <label
                         key={drink.id}
-                        className="flex items-center space-x-2 cursor-pointer p-2 hover:bg-gray-50 rounded"
+                        className="flex items-center space-x-2 cursor-pointer p-2 hover:bg-white rounded transition-colors"
                       >
                         <input
                           type="checkbox"
                           checked={formData.selectedDrinks.includes(drink.id)}
                           onChange={() => toggleDrink(drink.id)}
-                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                          className="w-4 h-4 text-[#c9732f] border-[#e5e3e0] rounded focus:ring-[#c9732f]"
                         />
-                        <span className="text-sm text-gray-700">
+                        <span className="text-sm text-[#1a1a1a]">
                           {drink.name}
                         </span>
                       </label>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
 
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              className="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-medium text-sm sm:text-base w-full sm:w-auto"
             >
               Party erstellen
             </button>
@@ -256,39 +256,39 @@ export default function DashboardPage() {
         <div className="space-y-6">
           {activeParties.length > 0 && (
             <div>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#1a1a1a] mb-4 sm:mb-5">
                 Aktive Partys
               </h2>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {activeParties.map((party) => (
                   <div
                     key={party.id}
-                    className="bg-white p-6 rounded-lg shadow-md border-2 border-green-200"
+                    className="bg-white border-2 border-[#2d5a3d] p-5 sm:p-6 rounded-lg"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-semibold text-gray-900">
+                      <h3 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] pr-2">
                         {party.name}
                       </h3>
-                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-[#e8f3ed] text-[#2d5a3d] text-xs font-medium rounded whitespace-nowrap">
                         Aktiv
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {party.drinks.length} Getränk(e) verfügbar
+                    <p className="text-sm text-[#4a4a4a] mb-2">
+                      {party.drinks.length} Getränk{party.drinks.length !== 1 ? "e" : ""} verfügbar
                     </p>
-                    <p className="text-sm text-gray-600 mb-4">
-                      {party.orders.length} Bestellung(en)
+                    <p className="text-sm text-[#4a4a4a] mb-4">
+                      {party.orders.length} Bestellung{party.orders.length !== 1 ? "en" : ""}
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Link
                         href={`/admin/party/${party.id}`}
-                        className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-center text-sm font-medium"
+                        className="flex-1 px-4 py-2 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors text-center text-sm font-medium"
                       >
                         Verwalten
                       </Link>
                       <button
                         onClick={() => togglePartyActive(party)}
-                        className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition text-sm"
+                        className="px-4 py-2 bg-white border border-[#e5e3e0] text-[#1a1a1a] rounded-lg hover:bg-[#faf9f7] transition-colors text-sm font-medium"
                       >
                         Deaktivieren
                       </button>
@@ -300,40 +300,40 @@ export default function DashboardPage() {
           )}
 
           {inactiveParties.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                Archiv (Inaktive Partys)
+            <div className="mt-8">
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#1a1a1a] mb-4 sm:mb-5">
+                Archiv
               </h2>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {inactiveParties.map((party) => (
                   <div
                     key={party.id}
-                    className="bg-white p-6 rounded-lg shadow-md border border-gray-200 opacity-75"
+                    className="bg-white border border-[#e5e3e0] p-5 sm:p-6 rounded-lg opacity-75"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-semibold text-gray-900">
+                      <h3 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] pr-2">
                         {party.name}
                       </h3>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-[#faf9f7] text-[#6b6b6b] text-xs font-medium rounded whitespace-nowrap">
                         Inaktiv
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {party.drinks.length} Getränk(e)
+                    <p className="text-sm text-[#4a4a4a] mb-2">
+                      {party.drinks.length} Getränk{party.drinks.length !== 1 ? "e" : ""}
                     </p>
-                    <p className="text-sm text-gray-600 mb-4">
-                      {party.orders.length} Bestellung(en)
+                    <p className="text-sm text-[#4a4a4a] mb-4">
+                      {party.orders.length} Bestellung{party.orders.length !== 1 ? "en" : ""}
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Link
                         href={`/admin/party/${party.id}`}
-                        className="flex-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition text-center text-sm font-medium"
+                        className="flex-1 px-4 py-2 bg-white border border-[#e5e3e0] text-[#1a1a1a] rounded-lg hover:bg-[#faf9f7] transition-colors text-center text-sm font-medium"
                       >
                         Ansehen
                       </Link>
                       <button
                         onClick={() => togglePartyActive(party)}
-                        className="px-4 py-2 bg-green-200 text-green-800 rounded-lg hover:bg-green-300 transition text-sm"
+                        className="px-4 py-2 bg-[#e8f3ed] text-[#2d5a3d] rounded-lg hover:bg-[#d4e7dc] transition-colors text-sm font-medium"
                       >
                         Aktivieren
                       </button>
@@ -345,11 +345,11 @@ export default function DashboardPage() {
           )}
 
           {parties.length === 0 && (
-            <div className="bg-white p-8 rounded-lg shadow-md text-center">
-              <p className="text-gray-600 text-lg mb-2">
+            <div className="bg-white border border-[#e5e3e0] p-8 rounded-lg text-center">
+              <p className="text-[#1a1a1a] text-base sm:text-lg mb-2 font-medium">
                 Noch keine Partys vorhanden.
               </p>
-              <p className="text-gray-500 text-sm">
+              <p className="text-[#6b6b6b] text-sm">
                 Klicke auf "Neue Party anlegen" um zu beginnen.
               </p>
             </div>

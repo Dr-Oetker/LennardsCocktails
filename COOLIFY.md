@@ -99,15 +99,36 @@ npx prisma migrate deploy
 
 ## Troubleshooting
 
+### Domain ist nicht erreichbar
+
+**DNS prüfen:**
+```bash
+nslookup order.lk-datagroup.de
+# Sollte die IP-Adresse deines Coolify-Servers zeigen
+```
+
+**In Coolify prüfen:**
+1. Gehe zu deiner App → **Domains**
+2. Stelle sicher, dass `order.lk-datagroup.de` hinzugefügt ist
+3. Prüfe, ob SSL-Zertifikat generiert wurde (kann einige Minuten dauern)
+4. Prüfe die Logs der App (App → Logs)
+
+**Häufige Probleme:**
+- Domain wurde noch nicht in Coolify hinzugefügt
+- SSL-Zertifikat wird noch generiert (warte 2-5 Minuten)
+- App läuft nicht (prüfe Logs)
+- Port 3000 ist nicht exponiert (prüfe Port-Konfiguration in Coolify)
+
 ### Migrationen schlagen fehl
 - Prüfe ob `DATABASE_URL` korrekt gesetzt ist
 - Prüfe ob die Datenbank erreichbar ist
 - Führe Migrationen manuell aus (siehe Schritt 7)
 
 ### App startet nicht
-- Prüfe die Logs in Coolify
+- Prüfe die Logs in Coolify (App → Logs)
 - Stelle sicher, dass alle Umgebungsvariablen gesetzt sind
 - Prüfe ob der Port 3000 verfügbar ist
+- Prüfe ob die App erfolgreich deployed wurde (Build-Logs)
 
 ### Push-Benachrichtigungen funktionieren nicht
 - Stelle sicher, dass die App über HTTPS läuft

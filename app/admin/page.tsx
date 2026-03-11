@@ -38,20 +38,20 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+    <div className="min-h-screen bg-[#faf9f7] flex items-center justify-center p-4 sm:p-6">
+      <div className="bg-white rounded-lg shadow-sm border border-[#e5e3e0] p-6 sm:p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            🍹 Lennards Cocktails
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#1a1a1a] mb-2 tracking-tight">
+            Lennards Cocktails
           </h1>
-          <p className="text-gray-600">Admin-Bereich</p>
+          <p className="text-sm sm:text-base text-[#6b6b6b] font-medium">Admin-Bereich</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-[#1a1a1a] mb-2"
             >
               Passwort
             </label>
@@ -60,7 +60,7 @@ export default function AdminLoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-[#e5e3e0] rounded-lg focus:ring-2 focus:ring-[#c9732f] focus:border-[#c9732f] bg-white text-[#1a1a1a] placeholder:text-[#6b6b6b] transition-colors"
               placeholder="Admin-Passwort eingeben"
               required
               autoFocus
@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-[#faeaea] border border-[#e8c4c4] text-[#8b2e2e] px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
@@ -76,7 +76,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-6 py-3 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed text-base"
           >
             {loading ? "Wird geladen..." : "Anmelden"}
           </button>

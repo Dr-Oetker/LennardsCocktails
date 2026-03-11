@@ -3,19 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #faf9f7;
+  --foreground: #1a1a1a;
+  --accent: #c9732f;
+  --accent-hover: #b86528;
+  --accent-light: #f5e6d9;
+  --border: #e5e3e0;
+  --surface: #ffffff;
+  --text-secondary: #4a4a4a;
+  --text-muted: #6b6b6b;
+  --success: #2d5a3d;
+  --success-light: #e8f3ed;
+  --warning: #8b6914;
+  --warning-light: #faf5e6;
+  --error: #8b2e2e;
+  --error-light: #faeaea;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

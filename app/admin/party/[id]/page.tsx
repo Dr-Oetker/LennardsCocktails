@@ -53,7 +53,7 @@ export default function PartyDetailPage() {
 
     const interval = setInterval(() => {
       fetchParty();
-    }, 3000); // Alle 3 Sekunden aktualisieren
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [party, isLive, params.id]);
@@ -68,9 +68,7 @@ export default function PartyDetailPage() {
       
       const data = await response.json();
       
-      // Prüfe ob neue Bestellungen hinzugekommen sind
       if (party && data.orders && data.orders.length > lastOrderCount) {
-        // Neue Bestellung - kurze visuelle Animation könnte hier hinzugefügt werden
         console.log(`Neue Bestellung! Gesamt: ${data.orders.length}`);
       }
       
@@ -175,9 +173,9 @@ export default function PartyDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-gray-600">Lade Party-Details...</p>
+      <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-[#6b6b6b]">Lade Party-Details...</p>
         </div>
       </div>
     );
@@ -185,10 +183,10 @@ export default function PartyDetailPage() {
 
   if (!party) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-gray-600">Party nicht gefunden.</p>
-          <Link href="/admin/dashboard" className="text-blue-600 hover:underline">
+      <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-[#6b6b6b] mb-4">Party nicht gefunden.</p>
+          <Link href="/admin/dashboard" className="text-[#c9732f] hover:text-[#b86528] underline font-medium">
             Zurück zum Dashboard
           </Link>
         </div>
@@ -199,64 +197,62 @@ export default function PartyDetailPage() {
   const partyUrl = typeof window !== "undefined" ? `${window.location.origin}/party/${party.slug}` : "";
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <Link
-              href="/admin/dashboard"
-              className="text-blue-600 hover:underline mb-2 inline-block"
-            >
-              ← Zurück zum Dashboard
-            </Link>
-            <h1 className="text-3xl font-bold text-gray-900">{party.name}</h1>
-            <p className="text-gray-600 mt-1">
-              Status:{" "}
-              <span
-                className={`font-medium ${
-                  party.isActive ? "text-green-600" : "text-gray-500"
-                }`}
-              >
-                {party.isActive ? "Aktiv" : "Inaktiv"}
-              </span>
-            </p>
+    <div className="min-h-screen bg-[#faf9f7] p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-6 sm:mb-8">
+          <Link
+            href="/admin/dashboard"
+            className="text-[#c9732f] hover:text-[#b86528] underline font-medium mb-3 inline-block text-sm sm:text-base"
+          >
+            Zurück zum Dashboard
+          </Link>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-[#1a1a1a] tracking-tight">{party.name}</h1>
+              <p className="text-sm sm:text-base text-[#6b6b6b] mt-1">
+                Status:{" "}
+                <span className={`font-medium ${party.isActive ? "text-[#2d5a3d]" : "text-[#6b6b6b]"}`}>
+                  {party.isActive ? "Aktiv" : "Inaktiv"}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* QR-Code */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">QR-Code</h2>
+          <div className="bg-white border border-[#e5e3e0] p-5 sm:p-6 rounded-lg">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#1a1a1a] mb-4">QR-Code</h2>
             {qrCodeUrl ? (
               <div className="space-y-4">
                 <div className="flex justify-center">
-                  <img src={qrCodeUrl} alt="QR Code" className="border-4 border-gray-200 rounded" />
+                  <img src={qrCodeUrl} alt="QR Code" className="border-2 border-[#e5e3e0] rounded" />
                 </div>
                 <div className="space-y-2">
                   <button
                     onClick={downloadQRCode}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    className="w-full px-4 py-2.5 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors font-medium text-sm sm:text-base"
                   >
                     QR-Code herunterladen
                   </button>
-                  <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded">
-                    <p className="font-medium mb-1">Link:</p>
-                    <p className="break-all">{partyUrl}</p>
+                  <div className="text-sm text-[#4a4a4a] bg-[#faf9f7] p-3 rounded border border-[#e5e3e0]">
+                    <p className="font-medium mb-1 text-[#1a1a1a]">Link:</p>
+                    <p className="break-all text-xs sm:text-sm">{partyUrl}</p>
                   </div>
                 </div>
               </div>
             ) : (
-              <p className="text-gray-500">QR-Code wird generiert...</p>
+              <p className="text-[#6b6b6b]">QR-Code wird generiert...</p>
             )}
           </div>
 
           {/* Getränke-Verwaltung */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white border border-[#e5e3e0] p-5 sm:p-6 rounded-lg">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Verfügbare Getränke</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-[#1a1a1a]">Verfügbare Getränke</h2>
               <button
                 onClick={() => setShowDrinkSelector(!showDrinkSelector)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#c9732f] text-white rounded-lg hover:bg-[#b86528] transition-colors text-xs sm:text-sm font-medium"
               >
                 {showDrinkSelector ? "Fertig" : "Bearbeiten"}
               </button>
@@ -271,15 +267,15 @@ export default function PartyDetailPage() {
                   return (
                     <label
                       key={drink.id}
-                      className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded cursor-pointer"
+                      className="flex items-center space-x-2 p-2 hover:bg-[#faf9f7] rounded cursor-pointer transition-colors"
                     >
                       <input
                         type="checkbox"
                         checked={isSelected}
                         onChange={() => toggleDrink(drink.id)}
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="w-4 h-4 text-[#c9732f] border-[#e5e3e0] rounded focus:ring-[#c9732f]"
                       />
-                      <span className="text-sm text-gray-700">{drink.name}</span>
+                      <span className="text-sm text-[#1a1a1a]">{drink.name}</span>
                     </label>
                   );
                 })}
@@ -287,19 +283,19 @@ export default function PartyDetailPage() {
             ) : (
               <div className="space-y-2">
                 {party.drinks.length === 0 ? (
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-[#6b6b6b] text-sm">
                     Noch keine Getränke ausgewählt.
                   </p>
                 ) : (
                   party.drinks.map((pd) => (
                     <div
                       key={pd.drink.id}
-                      className="p-3 bg-gray-50 rounded-lg border border-gray-200"
+                      className="p-3 bg-[#faf9f7] rounded-lg border border-[#e5e3e0]"
                     >
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-[#1a1a1a] text-sm sm:text-base">
                         {pd.drink.name}
                       </p>
-                      <p className="text-xs text-gray-600 mt-1">
+                      <p className="text-xs sm:text-sm text-[#6b6b6b] mt-1">
                         {pd.drink.ingredients.join(", ")}
                       </p>
                     </div>
@@ -311,34 +307,34 @@ export default function PartyDetailPage() {
         </div>
 
         {/* Bestellübersicht */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-4">
-              <h2 className="text-xl font-semibold">
+        <div className="bg-white border border-[#e5e3e0] p-5 sm:p-6 rounded-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-[#1a1a1a]">
                 Bestellungen ({party.orders.filter((o) => !o.isCompleted).length} offen, {party.orders.filter((o) => o.isCompleted).length} erledigt)
               </h2>
-              <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+              <label className="flex items-center gap-2 text-sm text-[#6b6b6b] cursor-pointer">
                 <input
                   type="checkbox"
                   checked={showCompleted}
                   onChange={(e) => setShowCompleted(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-[#c9732f] border-[#e5e3e0] rounded focus:ring-[#c9732f]"
                 />
                 Erledigte anzeigen
               </label>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 onClick={() => setIsLive(!isLive)}
-                className={`px-3 py-1 rounded-lg text-sm font-medium transition ${
+                className={`px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                   isLive
-                    ? "bg-green-100 text-green-800 hover:bg-green-200"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    ? "bg-[#e8f3ed] text-[#2d5a3d] hover:bg-[#d4e7dc]"
+                    : "bg-[#faf9f7] text-[#6b6b6b] hover:bg-white border border-[#e5e3e0]"
                 }`}
               >
                 {isLive ? (
                   <>
-                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    <span className="inline-block w-2 h-2 bg-[#2d5a3d] rounded-full mr-2 animate-pulse"></span>
                     Live
                   </>
                 ) : (
@@ -347,14 +343,14 @@ export default function PartyDetailPage() {
               </button>
               <button
                 onClick={fetchParty}
-                className="px-3 py-1 bg-blue-100 text-blue-800 rounded-lg hover:bg-blue-200 transition text-sm font-medium"
+                className="px-3 py-1.5 bg-[#f5e6d9] text-[#c9732f] rounded-lg hover:bg-[#f0dcc8] transition-colors text-xs sm:text-sm font-medium"
               >
                 Aktualisieren
               </button>
             </div>
           </div>
           {party.orders.length === 0 ? (
-            <p className="text-gray-500">Noch keine Bestellungen.</p>
+            <p className="text-[#6b6b6b]">Noch keine Bestellungen.</p>
           ) : (
             <div className="space-y-3">
               {party.orders
@@ -362,10 +358,10 @@ export default function PartyDetailPage() {
                 .map((order) => (
                   <div
                     key={order.id}
-                    className={`p-4 rounded-lg border transition ${
+                    className={`p-4 rounded-lg border transition-colors ${
                       order.isCompleted
-                        ? "bg-green-50 border-green-200 opacity-75"
-                        : "bg-gray-50 border-gray-200"
+                        ? "bg-[#e8f3ed] border-[#2d5a3d]/20 opacity-75"
+                        : "bg-[#faf9f7] border-[#e5e3e0]"
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -374,20 +370,20 @@ export default function PartyDetailPage() {
                           type="checkbox"
                           checked={order.isCompleted}
                           onChange={() => toggleOrderCompleted(order.id, order.isCompleted)}
-                          className="mt-1 w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500 cursor-pointer"
+                          className="mt-1 w-5 h-5 text-[#2d5a3d] border-[#e5e3e0] rounded focus:ring-[#2d5a3d] cursor-pointer"
                         />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <p className={`font-semibold ${order.isCompleted ? "text-gray-500 line-through" : "text-gray-900"}`}>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <p className={`font-semibold text-sm sm:text-base ${order.isCompleted ? "text-[#6b6b6b] line-through" : "text-[#1a1a1a]"}`}>
                               {order.guestName}
                             </p>
                             {order.isCompleted && (
-                              <span className="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-medium">
+                              <span className="px-2 py-0.5 bg-[#2d5a3d] text-white rounded text-xs font-medium">
                                 Erledigt
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-gray-600 mt-1">
+                          <p className="text-xs sm:text-sm text-[#6b6b6b] mt-1">
                             {new Date(order.createdAt).toLocaleString("de-DE", {
                               day: "2-digit",
                               month: "2-digit",
@@ -406,10 +402,10 @@ export default function PartyDetailPage() {
                             {order.items.map((item, idx) => (
                               <span
                                 key={idx}
-                                className={`px-3 py-1 rounded-full text-sm ${
+                                className={`px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
                                   order.isCompleted
-                                    ? "bg-green-100 text-green-700"
-                                    : "bg-blue-100 text-blue-800"
+                                    ? "bg-[#2d5a3d] text-white"
+                                    : "bg-[#f5e6d9] text-[#c9732f]"
                                 }`}
                               >
                                 {item.drink.name}
