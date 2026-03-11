@@ -10,12 +10,12 @@
     "generate-vapid-keys": "node scripts/generate-vapid-keys.js"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.5.0",
-    "@prisma/client": "^7.5.0",
+    "@prisma/adapter-pg": "7.4.1",
+    "@prisma/client": "7.4.1",
     "@types/qrcode": "^1.5.6",
     "next": "^16.1.6",
     "pg": "^8.20.0",
-    "prisma": "^7.5.0",
+    "prisma": "7.4.1",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
