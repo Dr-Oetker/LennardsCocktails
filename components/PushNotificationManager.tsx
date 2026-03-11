@@ -142,7 +142,7 @@ export default function PushNotificationManager() {
           
           console.log("Push-Subscription erfolgreich erstellt:", {
             endpoint: subscription.endpoint.substring(0, 50) + "...",
-            keys: Object.keys(subscription.keys),
+            hasKeys: !!(subscription.getKey && subscription.getKey("p256dh")),
           });
         } catch (subscribeError: any) {
           console.error("Fehler bei pushManager.subscribe:", subscribeError);
