@@ -34,6 +34,9 @@ Alternativ kannst du auch eine PostgreSQL-Instanz direkt in Coolify erstellen:
 In Coolify unter **Environment Variables** folgende Variablen setzen:
 
 ```env
+# Node.js Version (WICHTIG für Prisma 7.5.0!)
+NIXPACKS_NODE_VERSION="20"
+
 # Datenbank
 DATABASE_URL="postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres?pgbouncer=true"
 
@@ -48,6 +51,8 @@ VAPID_SUBJECT="mailto:deine-email@example.com"
 # Node Environment
 NODE_ENV="production"
 ```
+
+**Wichtig:** `NIXPACKS_NODE_VERSION="20"` muss gesetzt werden, damit Prisma 7.5.0 funktioniert (benötigt Node.js 20.19+ oder 22.12+).
 
 **Wichtig:** 
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY` muss mit `NEXT_PUBLIC_` beginnen
